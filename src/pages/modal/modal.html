@@ -1,0 +1,118 @@
+<ion-header>
+    <ion-navbar>
+
+
+        <ion-buttons>
+            <button (click)="dismiss()">
+                <ion-icon name="arrow-back" style="font-size: 2em;"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <!-- <ion-title *ngIf="type === 'C'">Confirmed</ion-title>
+         <ion-title *ngIf="type === 'R'">Recovered</ion-title>
+         <ion-title *ngIf="type === 'D'">Deaths</ion-title> -->
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-row style="font-weight: bolder;">
+                <ion-col col-4 *ngIf="!countrySearched">
+                    Country
+                </ion-col>
+                <ion-col col-4 *ngIf="countrySearched">
+                    Region
+                </ion-col>
+                <ion-col col-5 *ngIf="!countrySearched">
+                    Province
+                </ion-col>
+                <ion-col col-5 *ngIf="countrySearched">
+                    City
+                </ion-col>
+                <!-- <ion-col col-4 >
+                    Country
+                </ion-col>
+                <ion-col col-5>
+                    Province
+                </ion-col> -->
+                <ion-col col-3>
+                    Count
+                </ion-col>
+
+            </ion-row>
+        </ion-item>
+        <ion-item *ngFor="let item of data">
+            <ion-row>
+                <ion-col col-4 *ngIf="!countrySearched">
+                    {{item.countryRegion}}
+                </ion-col>
+                <!-- <ion-col col-4 *ngIf="countrySearched">
+                    {{item.combinedKey ?  
+                        item.combinedKey.split(',')[1] ? 
+                            item.combinedKey.split(',')[1] : 
+                            item.combinedKey.split(',')[0] 
+                        : item.provinceState ?  
+                            item.provinceState : 
+                            ''
+
+                    }}
+                </ion-col> -->
+                <ion-col col-4 *ngIf="countrySearched">
+                    {{ item.provinceState ? 
+                            item.provinceState
+                            :
+                            item.countryRegion
+                    }}
+                </ion-col>
+                <!-- <ion-col col-5>
+                    {{item.combinedKey?
+                        item.combinedKey.split(',')[1] ? 
+                        item.combinedKey.split(',')[0] : 
+                        ''
+                        : ''
+                    }}
+
+                </ion-col> -->
+
+                <!-- Based on provinceState -->
+                <ion-col col-5 style="white-space: normal;">
+                    {{
+                        item.provinceState ?  
+                            item.admin2 ? 
+                                countrySearched ?
+                                    item.admin2
+                                    :
+                                    item.admin2+', '+ item.provinceState
+                                    : 
+                                    countrySearched?
+                                        ''
+                                        :
+                                        item.provinceState
+                        : 
+                        '' 
+                    }}
+
+                </ion-col>
+
+                <!-- <ion-col col-4 >
+                    {{item.countryRegion}}
+                </ion-col>
+                <ion-col col-5>
+                    {{item.provinceState}}
+
+                </ion-col> -->
+                <ion-col col-3 *ngIf="type === 'C'">
+                    {{item.confirmed}}
+                </ion-col>
+                <ion-col col-3 *ngIf="type === 'R'">
+                    {{item.recovered}}
+                </ion-col>
+                <ion-col col-3 *ngIf="type === 'D'">
+                    {{item.deaths}}
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+</ion-content>
