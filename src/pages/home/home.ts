@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { AppService } from '../../service/app-service';
 
-import { ModalController } from 'ionic-angular';
+import { ModalController, LoadingController } from 'ionic-angular';
 
 import { ModalPage } from '../modal/modal';
 
@@ -25,9 +25,12 @@ export class HomePage {
   searchPlaceholder: string = "Search Country";
   selectedCountry: string = "";
 
+  loader;
+
   lastUpdateTime;
   constructor(public navCtrl: NavController, private appSvc: AppService,
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    public loadingCtrl: LoadingController) {
 
   }
 
@@ -59,9 +62,14 @@ export class HomePage {
 
   }
 
-  getGlobalCounts() {
+  getGlobalCounts(refresher?: any, isRefresh = false) {
+    this.showLoader();
     this.appSvc.getGlobalCounts().subscribe((data: any) => {
-      console.log(data);
+      if(isRefresh){
+        refresher.complete();
+      }
+      this.loader.dismiss();
+      // console.log(data);
       this.globalData = data;
 
       const confirmed = data.confirmed.value;
@@ -72,7 +80,6 @@ export class HomePage {
       this.recoveryPercentage = ((recoveries / confirmed) * 100).toFixed(2);
 
       this.lastUpdateTime = new Date(data.lastUpdate).toLocaleDateString() + " " + new Date(data.lastUpdate).toLocaleTimeString();
-
     }, err => {
       console.log("Error");
     })
@@ -126,8 +133,10 @@ export class HomePage {
     this.selectedCountry = country.isoCode;
     this.isSearch = false;
     this.resetSearchResults();
+    this.showLoader();
     this.appSvc.getCountByCountry(country.isoCode).subscribe((data: any) => {
-      console.log(data);
+      this.loader.dismiss();
+      // console.log(data);
       this.globalData = data;
 
       const confirmed = data.confirmed.value;
@@ -149,8 +158,9 @@ export class HomePage {
 
   getConfirmedCases() {
     console.log(this.selectedCountry);
+    this.showLoader();
     this.appSvc.getConfirmedCasesPerRegionByCountry(this.selectedCountry).subscribe((data: any) => {
-      console.log(data);
+      //console.log(data);
       this.presentModal(data, 'C');
     }, err => {
       console.log("error...");
@@ -158,8 +168,9 @@ export class HomePage {
   }
 
   getRecoveredCases() {
+    this.showLoader();
     this.appSvc.getRecoveredCasesPerRegionByCountry(this.selectedCountry).subscribe((data: any) => {
-      console.log(data);
+      //console.log(data);
       this.presentModal(data, 'R');
     }, err => {
       console.log("error...");
@@ -167,8 +178,9 @@ export class HomePage {
   }
 
   getDeathCases() {
+    this.showLoader();
     this.appSvc.getDeathCasesPerRegionByCountry(this.selectedCountry).subscribe((data: any) => {
-      console.log(data);
+      //console.log(data);
       this.presentModal(data, 'D');
     }, err => {
       console.log("error...");
@@ -176,10 +188,6 @@ export class HomePage {
   }
 
   async presentModal(data: any, type: string) {
-    // const modal = await this.modalController.create({
-    //   component: ModalPage
-    // });
-    // return await modal.present();
     const modal = this.modalController.create(ModalPage, {
       data: data,
       type: type,
@@ -189,6 +197,21 @@ export class HomePage {
       console.log("modal.onDidDismiss");
       console.log(data);
     });
-    modal.present();
+    modal.present().then(()=>{
+      this.loader.dismiss();
+    });
+  }
+
+  showLoader() {
+    this.loader = this.loadingCtrl.create({
+        content: `loading...`,
+    });
+    this.loader.present();    
+  }
+
+  doRefresh(refresher){
+    console.log(refresher);
+    this.getGlobalCounts(refresher, true);
+
   }
 }

@@ -9,7 +9,12 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list class="weatherList" *ngIf="isSearch">
     <ion-item id="searchArea" class="listItem" *ngFor="let country of matchedCountries"
       (click)="selectCountry(country)">
@@ -27,7 +32,7 @@
         </ion-col>
         <ion-col col-1>
           <span item-right class="arrow">
-            <ion-icon  name="arrow-forward"></ion-icon>
+            <ion-icon name="arrow-forward"></ion-icon>
           </span>
         </ion-col>
       </ion-row>
@@ -50,7 +55,7 @@
         </ion-col>
         <ion-col col-1>
           <span item-right class="arrow">
-            <ion-icon  name="arrow-forward"></ion-icon>
+            <ion-icon name="arrow-forward"></ion-icon>
           </span>
         </ion-col>
       </ion-row>
@@ -72,7 +77,7 @@
         </ion-col>
         <ion-col col-1>
           <span item-right class="arrow">
-            <ion-icon  name="arrow-forward"></ion-icon>
+            <ion-icon name="arrow-forward"></ion-icon>
           </span>
         </ion-col>
       </ion-row>
