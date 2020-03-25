@@ -1,60 +1,83 @@
 <ion-header>
   <ion-navbar>
-    <!-- <ion-title>Home</ion-title> -->
     <ion-toolbar>
-      <ion-searchbar  animated class="search font-bold" type="text" id="locationSearch" 
-    placeholder="{{searchPlaceholder}}"
-    [(ngModel)]="query" 
-    (ionClear)="onCancel($event)" 
-    (ionFocus)="clear($event)"
-    (ionInput)="searchPlace()"
-    value="selectedCountry">
-  </ion-searchbar>
+      <ion-searchbar animated class="search font-bold" type="text" id="locationSearch"
+        placeholder="{{searchPlaceholder}}" [(ngModel)]="query" (ionClear)="onCancel($event)" (ionFocus)="clear($event)"
+        (ionInput)="searchPlace()" value="selectedCountry">
+      </ion-searchbar>
     </ion-toolbar>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <!-- <ion-searchbar class="search font-bold" type="text" id="locationSearch" 
-    placeholder="{{searchPlaceholder}}"
-    [(ngModel)]="query" 
-    (ionClear)="onCancel($event)" 
-    (ionFocus)="clear($event)"
-    (ionInput)="searchPlace()">
-  </ion-searchbar> -->
-
- <ion-list class="weatherList" *ngIf="isSearch">
-      <ion-item id="searchArea" class="listItem" *ngFor="let country of matchedCountries" 
+  <ion-list class="weatherList" *ngIf="isSearch">
+    <ion-item id="searchArea" class="listItem" *ngFor="let country of matchedCountries"
       (click)="selectCountry(country)">
       {{country.name}}
     </ion-item>
   </ion-list>
 
-  <ion-card *ngIf="!isSearch">
+  <ion-card *ngIf="!isSearch" (click)="getConfirmedCases()">
     <ion-card-header>
-      <ion-card-title class="center orange" >Confirmed</ion-card-title>
+      <ion-row justify-content-between>
+        <ion-col col-11>
+          <span item-left>
+            <ion-card-title class="center orange">Confirmed</ion-card-title>
+          </span>
+        </ion-col>
+        <ion-col col-1>
+          <span item-right class="arrow">
+            <ion-icon  name="arrow-forward"></ion-icon>
+          </span>
+        </ion-col>
+      </ion-row>
+
     </ion-card-header>
-  
+
     <ion-card-content class="center numbers">
       {{globalData? globalData.confirmed.value : 0}}
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="!isSearch">
+  <ion-card *ngIf="!isSearch" (click)="getRecoveredCases()">
     <ion-card-header>
-      <ion-card-title class="center green">Recovered <span class="percentageDisplay">({{recoveryPercentage}} %)</span></ion-card-title>
+      <ion-row justify-content-between>
+        <ion-col col-11>
+          <span item-left>
+            <ion-card-title class="center green">Recovered <span class="percentageDisplay">({{recoveryPercentage}}
+                %)</span></ion-card-title>
+          </span>
+        </ion-col>
+        <ion-col col-1>
+          <span item-right class="arrow">
+            <ion-icon  name="arrow-forward"></ion-icon>
+          </span>
+        </ion-col>
+      </ion-row>
     </ion-card-header>
-  
+
     <ion-card-content class="center numbers">
       {{globalData? globalData.recovered.value : 0}}
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="!isSearch">   
+  <ion-card *ngIf="!isSearch" (click)="getDeathCases()">
     <ion-card-header>
-      <ion-card-title class="center red">Deaths <span class="percentageDisplay"> ({{deathPercentage}} %)</span></ion-card-title>
+      <ion-row justify-content-between>
+        <ion-col col-11>
+          <span item-left>
+            <ion-card-title class="center red">Deaths <span class="percentageDisplay"> ({{deathPercentage}} %)</span>
+            </ion-card-title>
+          </span>
+        </ion-col>
+        <ion-col col-1>
+          <span item-right class="arrow">
+            <ion-icon  name="arrow-forward"></ion-icon>
+          </span>
+        </ion-col>
+      </ion-row>
     </ion-card-header>
-  
+
     <ion-card-content class="center numbers">
       {{globalData? globalData.deaths.value : 0}}
     </ion-card-content>

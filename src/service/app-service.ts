@@ -26,4 +26,25 @@ export class AppService {
       return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}`);
   }
 
+  getConfirmedCasesPerRegionByCountry(countryISOCode: string){
+    if(!countryISOCode){
+      return this.http.get('https://covid19.mathdro.id/api/confirmed');
+    }
+    return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}/confirmed`);
+  }
+
+  getRecoveredCasesPerRegionByCountry(countryISOCode: string){
+    if(!countryISOCode){
+      return this.http.get('https://covid19.mathdro.id/api/recovered');
+    }
+    return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}/recovered`);
+  }
+
+  getDeathCasesPerRegionByCountry(countryISOCode: string){
+    if(!countryISOCode){
+      return this.http.get('https://covid19.mathdro.id/api/deaths');
+    }
+    return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}/deaths`);
+  }
+
 }
