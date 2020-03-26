@@ -134,7 +134,14 @@ export class HomePage {
     this.isSearch = false;
     this.resetSearchResults();
     this.showLoader();
-    this.appSvc.getCountByCountry(country.isoCode).subscribe((data: any) => {
+    this.getCasesByCountry(country);
+  }
+
+  getCasesByCountry(country: any, refresher?: any, isRefresh = false){
+    this.appSvc.getCountByCountry(isRefresh? country : country.isoCode).subscribe((data: any) => {
+      if(isRefresh){
+        refresher.complete();
+      }
       this.loader.dismiss();
       // console.log(data);
       this.globalData = data;
@@ -210,8 +217,11 @@ export class HomePage {
   }
 
   doRefresh(refresher){
-    console.log(refresher);
-    this.getGlobalCounts(refresher, true);
-
+    // console.log(refresher);
+    if(this.selectedCountry){
+      this.getCasesByCountry(this.selectedCountry, refresher, true);
+    }else{
+      this.getGlobalCounts(refresher, true);
+    }
   }
 }
