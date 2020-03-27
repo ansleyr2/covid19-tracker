@@ -4,6 +4,17 @@ Ionic Angular project(Hybrid Mobile App) to track covid19 cases.
 
 Download the app : https://drive.google.com/drive/folders/1HEPLHSY-Mzmu4Yz9ltSNHqRK6cR9WMMD?usp=sharing
 
+<table>
+  <tr>
+    <td><img src="https://github.com/ansleyr2/covid19-tracker/blob/app-images-for-readme/src/assets/app-images/app-1.PNG" height="400" />
+</td>
+    <td><img src="https://github.com/ansleyr2/covid19-tracker/blob/app-images-for-readme/src/assets/app-images/app-2.PNG" height="400" />
+</td>
+    <td><img src="https://github.com/ansleyr2/covid19-tracker/blob/app-images-for-readme/src/assets/app-images/app-3.PNG" height="400" />
+</td>
+  </tr>
+</table>
+
 
 ## Getting Started
 
