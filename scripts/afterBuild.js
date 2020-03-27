@@ -24,20 +24,14 @@ module.exports = function (ctx) {
     );
     const drive = google.drive({ version: "v3", auth });
 
-
-
-    // return stat(apkFileLocation).then(stats => {
-    //     console.log(`Size of ${apkFileLocation} is ${stats.size} bytes`);
-    // });
-
     drive.files.list({}, (err, res) => {
         if (err) throw err;
         const files = res.data.files;
         if (files.length) {
             files.map((file) => {
-                console.log(file);
+                // console.log(file);
                 if (file.name === 'covid19-tracker.apk') {
-                    // Delete file
+                    // Delete file to avoid duplicacies
                     drive.files.delete({ fileId: file.id }, (err, res) => {
                         if (err) throw err;
 
@@ -76,6 +70,3 @@ module.exports = function (ctx) {
         }
     });
 };
-
-
-
