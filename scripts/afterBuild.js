@@ -46,7 +46,7 @@ module.exports = function (ctx) {
             });
 
             // Create file
-            var folderId = '1UT2ojQxLieujUK5cBrUdEMv7qLHdgXva';
+            var folderId = '1HEPLHSY-Mzmu4Yz9ltSNHqRK6cR9WMMD';
 
             var fileMetadata = {
                 'name': 'covid19-tracker.apk',
