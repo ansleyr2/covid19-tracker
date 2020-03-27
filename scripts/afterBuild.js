@@ -1,3 +1,7 @@
+/**
+ * Reference - https://medium.com/@bretcameron/how-to-use-the-google-drive-api-with-javascript-57a6cc9e5262
+ * 
+ */
 const fs = require('fs');
 const util = require('util');
 
@@ -20,44 +24,58 @@ module.exports = function (ctx) {
     );
     const drive = google.drive({ version: "v3", auth });
 
-    var folderId = '1UT2ojQxLieujUK5cBrUdEMv7qLHdgXva';
 
-    var fileMetadata = {
-        'name': 'covid19-tracker.apk',
-        parents: [folderId]
-    };
-    var media = {
-        mimeType: 'application/vnd.android.package-archive',
-        body: fs.createReadStream(apkFileLocation)
-    };
-    drive.files.create({
-        resource: fileMetadata,
-        media: media,
-        fields: 'id'
-    }, function (err, file) {
-        if (err) {
-            // Handle error
-            console.error(err);
-        } else {
-            console.log('File Id: ', file.id);
-        }
-    });
 
     // return stat(apkFileLocation).then(stats => {
     //     console.log(`Size of ${apkFileLocation} is ${stats.size} bytes`);
     // });
+
+    drive.files.list({}, (err, res) => {
+        if (err) throw err;
+        const files = res.data.files;
+        if (files.length) {
+            files.map((file) => {
+                console.log(file);
+                if (file.name === 'covid19-tracker.apk') {
+                    // Delete file
+                    drive.files.delete({ fileId: file.id }, (err, res) => {
+                        if (err) throw err;
+
+                    })
+                }
+            });
+
+            // Create file
+            var folderId = '1UT2ojQxLieujUK5cBrUdEMv7qLHdgXva';
+
+            var fileMetadata = {
+                'name': 'covid19-tracker.apk',
+                parents: [folderId]
+            };
+            var media = {
+                mimeType: 'application/vnd.android.package-archive',
+                body: fs.createReadStream(apkFileLocation)
+            };
+
+            drive.files.create({
+                resource: fileMetadata,
+                media: media,
+                fields: 'id'
+            }, function (err, file) {
+                if (err) {
+                    // Handle error
+                    console.error(err);
+                } else {
+                    console.log('File Id: ', file.id);
+                    console.log("File upload  complete...");
+                }
+            });
+
+        } else {
+            console.log('No files found');
+        }
+    });
 };
 
 
 
-/*drive.files.list({}, (err, res) => {
-  if (err) throw err;
-  const files = res.data.files;
-  if (files.length) {
-  files.map((file) => {
-    console.log(file);
-  });
-  } else {
-    console.log('No files found');
-  }
-});*/
