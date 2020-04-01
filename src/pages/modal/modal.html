@@ -8,14 +8,13 @@
             </button>
         </ion-buttons>
 
-        <!-- <ion-title *ngIf="type === 'C'">Confirmed</ion-title>
-         <ion-title *ngIf="type === 'R'">Recovered</ion-title>
-         <ion-title *ngIf="type === 'D'">Deaths</ion-title> -->
 
     </ion-navbar>
 </ion-header>
 
+
 <ion-content>
+    
     <ion-list>
         <ion-item>
             <ion-row style="font-weight: bolder;">
@@ -31,12 +30,6 @@
                 <ion-col col-5 *ngIf="countrySearched">
                     City
                 </ion-col>
-                <!-- <ion-col col-4 >
-                    Country
-                </ion-col>
-                <ion-col col-5>
-                    Province
-                </ion-col> -->
                 <ion-col col-3>
                     Count
                 </ion-col>
@@ -48,17 +41,7 @@
                 <ion-col col-4 *ngIf="!countrySearched">
                     {{item.countryRegion}}
                 </ion-col>
-                <!-- <ion-col col-4 *ngIf="countrySearched">
-                    {{item.combinedKey ?  
-                        item.combinedKey.split(',')[1] ? 
-                            item.combinedKey.split(',')[1] : 
-                            item.combinedKey.split(',')[0] 
-                        : item.provinceState ?  
-                            item.provinceState : 
-                            ''
 
-                    }}
-                </ion-col> -->
                 <ion-col col-4 *ngIf="countrySearched">
                     {{ item.provinceState ? 
                             item.provinceState
@@ -66,15 +49,7 @@
                             item.countryRegion
                     }}
                 </ion-col>
-                <!-- <ion-col col-5>
-                    {{item.combinedKey?
-                        item.combinedKey.split(',')[1] ? 
-                        item.combinedKey.split(',')[0] : 
-                        ''
-                        : ''
-                    }}
 
-                </ion-col> -->
 
                 <!-- Based on provinceState -->
                 <ion-col col-5 style="white-space: normal;">
@@ -95,14 +70,6 @@
                     }}
 
                 </ion-col>
-
-                <!-- <ion-col col-4 >
-                    {{item.countryRegion}}
-                </ion-col>
-                <ion-col col-5>
-                    {{item.provinceState}}
-
-                </ion-col> -->
                 <ion-col col-3 *ngIf="type === 'C'">
                     {{item.confirmed}}
                 </ion-col>
