@@ -47,4 +47,12 @@ export class AppService {
     return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}/deaths`);
   }
 
+  getUSStatesData(){
+    return this.http.get(`https://corona.lmao.ninja/states`);
+  }
+
+  getCasesAndTodaysCountsByCountry(countryISOCode){
+    return this.http.get(`https://corona.lmao.ninja/countries/${countryISOCode}`);
+  }
+
 }

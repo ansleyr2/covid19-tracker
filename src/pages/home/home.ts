@@ -7,6 +7,14 @@ import { ModalController, LoadingController } from 'ionic-angular';
 
 import { ModalPage } from '../modal/modal';
 
+interface todayData{
+  todayCases? : number;
+  todayDeaths ? : number;
+  casesPerOneMillion? : number;
+  deathsPerOneMillion? : number;
+  isError? : boolean
+}
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -28,6 +36,8 @@ export class HomePage {
   loader;
 
   lastUpdateTime;
+
+  todayData: todayData = {isError: true};
   constructor(public navCtrl: NavController, private appSvc: AppService,
     public modalController: ModalController,
     public loadingCtrl: LoadingController) {
@@ -35,6 +45,9 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
+    console.log(this.selectedCountry);
+    this.countries = [];
+    this.resetSearchResults();
     this.appSvc.getCountriesList().subscribe((data: any) => {
       // console.log(data.countries);
       const countriesObj = data.countries;
@@ -54,7 +67,8 @@ export class HomePage {
 
       console.log(this.countries);
 
-      this.getGlobalCounts();
+
+      this.selectedCountry? this.getCasesByCountry(this.selectedCountry)  : this.getGlobalCounts();
 
     }, err => {
       console.log("Error while fetching countries");
@@ -92,20 +106,22 @@ export class HomePage {
     this.selectedCountry = null;
   }
 
-  clear(event?) {
-    console.log("clear");
-    this.isSearch = false;
-    this.resetSearchResults();
-    // this.query = "";
-    //this.getGlobalCounts();
-    this.selectedCountry = null;
-  }
+  // clear(event?) {
+  //   console.log("clear");
+  //   this.isSearch = false;
+  //   this.resetSearchResults();
+  //   // this.query = "";
+  //   //this.getGlobalCounts();
+  //   this.selectedCountry = null;
+  //   this.todayData = {isError: true};
+  // }
 
   onCancel(event?) {
     console.log("onCancel");
     this.isSearch = false;
     this.resetSearchResults();
     this.selectedCountry = null;
+    this.todayData = {isError: true};
   }
 
   searchPlace() {
@@ -134,11 +150,12 @@ export class HomePage {
     this.isSearch = false;
     this.resetSearchResults();
     this.showLoader();
-    this.getCasesByCountry(country);
+    this.getCasesByCountry(country.isoCode);
   }
 
   getCasesByCountry(country: any, refresher?: any, isRefresh = false){
-    this.appSvc.getCountByCountry(isRefresh? country : country.isoCode).subscribe((data: any) => {
+    this.appSvc.getCountByCountry(country).subscribe((data: any) => {
+      this.getTodayData(country);
       if(isRefresh){
         refresher.complete();
       }
@@ -223,5 +240,25 @@ export class HomePage {
     }else{
       this.getGlobalCounts(refresher, true);
     }
+  }
+
+  getTodayData(country){
+    this.appSvc.getCasesAndTodaysCountsByCountry(country).subscribe((res: any)=>{
+      const todayCases = res.todayCases;
+      const todayDeaths = res.todayDeaths;
+      const casesPerOneMillion = res.casesPerOneMillion;
+      const deathsPerOneMillion = res.deathsPerOneMillion;
+      this.todayData ={
+        todayCases,
+        todayDeaths,
+        casesPerOneMillion,
+        deathsPerOneMillion,
+        isError: false
+      }
+      console.log(todayCases, todayDeaths, casesPerOneMillion, deathsPerOneMillion);
+    }, err =>{
+      console.log(err);
+      this.todayData.isError = true;
+    });
   }
 }

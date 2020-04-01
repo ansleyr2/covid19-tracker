@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-toolbar>
       <ion-searchbar animated class="search font-bold" type="text" id="locationSearch"
-        placeholder="{{searchPlaceholder}}" [(ngModel)]="query" (ionClear)="onCancel($event)" (ionFocus)="clear($event)"
+        placeholder="{{searchPlaceholder}}" [(ngModel)]="query" (ionClear)="onCancel($event)"
         (ionInput)="searchPlace()" value="selectedCountry">
       </ion-searchbar>
     </ion-toolbar>
@@ -10,7 +10,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding style="background-color: whitesmoke;">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -40,7 +40,7 @@
     </ion-card-header>
 
     <ion-card-content class="center numbers">
-      {{globalData? globalData.confirmed.value : 0}}
+      {{globalData? globalData.confirmed.value : 0}} <span style="font-size: 12px; color: gray;"> {{!todayData.isError ? '+' : ''}} {{!todayData.isError ? todayData.todayCases : ''}} {{!todayData.isError ? 'today' : ''}} </span>
     </ion-card-content>
   </ion-card>
 
@@ -84,8 +84,22 @@
     </ion-card-header>
 
     <ion-card-content class="center numbers">
-      {{globalData? globalData.deaths.value : 0}}
+      {{globalData? globalData.deaths.value : 0}} <span style="font-size: 12px; color: gray;"> {{!todayData.isError ? '+' : ''}} {{!todayData.isError ? todayData.todayDeaths : ''}} {{!todayData.isError ? 'today' : ''}} </span>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="!isSearch" class="no-shadow center">Last Updated : {{lastUpdateTime}} </ion-card>
+  <!-- <ion-card *ngIf="!isSearch" 
+  class="no-shadow center" 
+  style="background-color: whitesmoke;">
+    Last Updated : {{lastUpdateTime}} 
+  </ion-card> -->
+  <ion-card *ngIf="!isSearch && !todayData.isError" 
+  class="no-shadow center" 
+  style="background-color: whitesmoke;">
+    Cases/Million : {{todayData.casesPerOneMillion}} 
+  </ion-card>
+  <ion-card *ngIf="!isSearch && !todayData.isError" 
+  class="no-shadow center" 
+  style="background-color: whitesmoke;">
+    Deaths/Million : {{todayData.deathsPerOneMillion}} 
+  </ion-card>
 </ion-content>

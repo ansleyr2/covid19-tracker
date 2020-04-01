@@ -8,7 +8,6 @@ import { ViewController } from 'ionic-angular';
     templateUrl: 'modal.html'
 })
 export class ModalPage {
-
     data: any[] = [];
     type: string;
     countrySearched: boolean = false;
