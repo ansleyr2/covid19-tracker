@@ -19,7 +19,9 @@ export class AppService {
   }
 
   getCountriesList(){
-      return this.http.get("https://covid19.mathdro.id/api/countries");
+      // return this.http.get("https://covid19.mathdro.id/api/countries");
+
+      return this.http.get('https://corona.lmao.ninja/countries');
   }
 
   getCountByCountry(countryISOCode: string){
@@ -53,6 +55,10 @@ export class AppService {
 
   getCasesAndTodaysCountsByCountry(countryISOCode){
     return this.http.get(`https://corona.lmao.ninja/countries/${countryISOCode}`);
+  }
+
+  getGlobalCounts_1(){
+    return this.http.get(`https://corona.lmao.ninja/all`);
   }
 
 }

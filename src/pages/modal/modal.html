@@ -15,7 +15,7 @@
 
 <ion-content>
     
-    <ion-list>
+    <ion-list *ngIf="!showMoreInfo">
         <ion-item>
             <ion-row style="font-weight: bolder;">
                 <ion-col col-4 *ngIf="!countrySearched">
@@ -82,4 +82,52 @@
             </ion-row>
         </ion-item>
     </ion-list>
+    <ion-list *ngIf="showMoreInfo">
+        <ion-item>
+            <ion-row>
+                <ion-col col-8>Today Cases</ion-col>
+                <ion-col col-4>{{data.todayCases}}</ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-8>Today Deaths</ion-col>
+                <ion-col col-4>{{data.todayDeaths}}</ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-8>Active Cases</ion-col>
+                <ion-col col-4>{{data.active}}</ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-8>Critical Cases</ion-col>
+                <ion-col col-4>{{data.critical}}</ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-8>Cases Per One Millon</ion-col>
+                <ion-col col-4>{{data.casesPerOneMillion}}</ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-8>Deaths Per One Million</ion-col>
+                <ion-col col-4>{{data.deathsPerOneMillion}}</ion-col>
+            </ion-row>
+        </ion-item>
+        <!-- <ion-item>
+            <ion-row>
+               Last Updated : {{data.updated}}
+            </ion-row>
+        </ion-item> -->
+
+    </ion-list>
+    <ion-card *ngIf="showMoreInfo" 
+    class="no-shadow center" >
+        Last Updated : {{data.updated}} 
+    </ion-card>
 </ion-content>
