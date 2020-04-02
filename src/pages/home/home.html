@@ -15,6 +15,11 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-card *ngIf="!isSearch && !selectedCountry" 
+  class="no-shadow center" 
+  style="background-color: whitesmoke;">
+   Global
+  </ion-card>
   <ion-list class="weatherList" *ngIf="isSearch">
     <ion-item id="searchArea" class="listItem" *ngFor="let country of matchedCountries"
       (click)="selectCountry(country)">
@@ -40,7 +45,10 @@
     </ion-card-header>
 
     <ion-card-content class="center numbers">
-      {{globalData? globalData.confirmed.value : 0}} <span style="font-size: 12px; color: gray;"> {{!todayData.isError ? '+' : ''}} {{!todayData.isError ? todayData.todayCases : ''}} {{!todayData.isError ? 'today' : ''}} </span>
+      <!-- {{globalData? globalData.confirmed.value : 0}} <span style="font-size: 12px; color: gray;"> {{!todayData.isError ? '+' : ''}} {{!todayData.isError ? todayData.todayCases : ''}} {{!todayData.isError ? 'today' : ''}} </span> -->
+
+      {{globalData? globalData.confirmed : 0}} 
+      <!-- <span style="font-size: 12px; color: gray;"> {{!todayData.isError ? '+' : ''}} {{!todayData.isError ? todayData.todayCases : ''}} {{!todayData.isError ? 'today' : ''}} </span> -->
     </ion-card-content>
   </ion-card>
 
@@ -62,7 +70,9 @@
     </ion-card-header>
 
     <ion-card-content class="center numbers">
-      {{globalData? globalData.recovered.value : 0}}
+      <!-- {{globalData? globalData.recovered.value : 0}} -->
+      {{globalData? globalData.recovered : 0}}
+
     </ion-card-content>
   </ion-card>
 
@@ -84,15 +94,18 @@
     </ion-card-header>
 
     <ion-card-content class="center numbers">
-      {{globalData? globalData.deaths.value : 0}} <span style="font-size: 12px; color: gray;"> {{!todayData.isError ? '+' : ''}} {{!todayData.isError ? todayData.todayDeaths : ''}} {{!todayData.isError ? 'today' : ''}} </span>
+      <!-- {{globalData? globalData.deaths.value : 0}} <span style="font-size: 12px; color: gray;"> {{!todayData.isError ? '+' : ''}} {{!todayData.isError ? todayData.todayDeaths : ''}} {{!todayData.isError ? 'today' : ''}} </span> -->
+
+      {{globalData? globalData.deaths : 0}} 
+      <!-- <span style="font-size: 12px; color: gray;"> {{!todayData.isError ? '+' : ''}} {{!todayData.isError ? todayData.todayDeaths : ''}} {{!todayData.isError ? 'today' : ''}} </span> -->
     </ion-card-content>
   </ion-card>
-  <!-- <ion-card *ngIf="!isSearch" 
+  <ion-card *ngIf="!isSearch" 
   class="no-shadow center" 
   style="background-color: whitesmoke;">
     Last Updated : {{lastUpdateTime}} 
-  </ion-card> -->
-  <ion-card *ngIf="!isSearch && !todayData.isError" 
+  </ion-card>
+  <!-- <ion-card *ngIf="!isSearch && !todayData.isError" 
   class="no-shadow center" 
   style="background-color: whitesmoke;">
     Cases/Million : {{todayData.casesPerOneMillion}} 
@@ -101,5 +114,7 @@
   class="no-shadow center" 
   style="background-color: whitesmoke;">
     Deaths/Million : {{todayData.deathsPerOneMillion}} 
-  </ion-card>
+  </ion-card> -->
+  <button *ngIf="selectedCountry && !isSearch" ion-button block clear primary outline (click)="getTodayData()">More</button>
+
 </ion-content>
