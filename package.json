@@ -16,6 +16,7 @@
     "@angular/compiler": "5.2.11",
     "@angular/compiler-cli": "5.2.11",
     "@angular/core": "5.2.11",
+    "@angular/fire": "^6.0.0",
     "@angular/forms": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
@@ -24,6 +25,8 @@
     "@ionic-native/status-bar": "4.20.0",
     "@ionic/storage": "2.2.0",
     "cordova-android": "8.1.0",
+    "cordova-unique-device-id": "^1.3.2",
+    "firebase": "^7.13.2",
     "googleapis": "^39.2.0",
     "ionic-angular": "3.9.9",
     "ionicons": "3.0.0",
@@ -51,7 +54,8 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-unique-device-id": {}
     },
     "platforms": [
       "android"
