@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { AngularFireDatabase } from '@angular/fire/database';
+
 
 @Injectable()
 
 export class AppService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, public db: AngularFireDatabase,) { 
 
   }
 
@@ -61,4 +63,18 @@ export class AppService {
     return this.http.get(`https://corona.lmao.ninja/all`);
   }
 
+  addDeviceDetails(deviceId: string){
+
+    return new Promise<any>((resolve, reject) => {
+        this.db.database.ref('Device_details/' + deviceId).set({
+          'device' : 'Android',
+          'date' : new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
+        }).then((res) => {
+          resolve(res);
+        })
+          .catch((err) => {
+              reject(err);
+          });
+    })
+}
 }
