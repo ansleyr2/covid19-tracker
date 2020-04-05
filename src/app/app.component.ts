@@ -19,24 +19,26 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-
-      if (window.plugins && window.plugins.uniqueDeviceID) {
+      
+      setTimeout(() => {
+        if (window.plugins && window.plugins.uniqueDeviceID) {
  
-        // request UUID
-        window.plugins.uniqueDeviceID((uuid) => {
-            // got it!
-            console.log(uuid);
-            appService.addDeviceDetails(uuid).then( () => {
-              console.log('device details saved successfully');
-            }).catch(()=>{
-              console.log('error while saving device details');
-            });
-        },
-        (err) => {
-            // something went wrong
-            console.warn(err);
-        });
-      }
+          // request UUID
+          window.plugins.uniqueDeviceID.get((uuid) => {
+              // got it!
+              console.log(uuid);
+              this.appService.addDeviceDetails(uuid).then( () => {
+                console.log('device details saved successfully');
+              }).catch(()=>{
+                console.log('error while saving device details');
+              });
+          },
+          (err) => {
+              // something went wrong
+              console.warn(err);
+          });
+        }
+      }, 500);
     });
   }
 }

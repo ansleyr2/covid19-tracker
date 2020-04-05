@@ -66,7 +66,9 @@ export class AppService {
   addDeviceDetails(deviceId: string){
 
     return new Promise<any>((resolve, reject) => {
-        this.db.database.ref('Device/' + deviceId).set({
+        this.db.database.ref('Device_details/' + deviceId).set({
+          'device' : 'Android',
+          'date' : new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
         }).then((res) => {
           resolve(res);
         })
