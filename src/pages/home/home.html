@@ -17,7 +17,7 @@
 
   <ion-card *ngIf="!isSearch && !selectedCountry" 
   class="no-shadow center" 
-  style="background-color: whitesmoke;">
+  style="background-color: whitesmoke; color: midnightblue;">
    Global
   </ion-card>
   <ion-list class="weatherList" *ngIf="isSearch">
@@ -102,7 +102,8 @@
   </ion-card>
   <ion-card *ngIf="!isSearch" 
   class="no-shadow center" 
-  style="background-color: whitesmoke;">
+  style="background-color: whitesmoke;
+  color: midnightblue;">
     Last Updated : {{lastUpdateTime}} 
   </ion-card>
   <!-- <ion-card *ngIf="!isSearch && !todayData.isError" 

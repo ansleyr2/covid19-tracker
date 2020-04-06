@@ -36,7 +36,10 @@ page-home {
     top: 20px;
     position: absolute;
 }
-
+.card-md + ion-card {
+    margin-top: 0;
+    background-color: #f3fcff;;
+}
 // .arrow-mini {
 //     background-image: url(/assets/icon/arrow-mini.svg);
 //     height: 20px;
