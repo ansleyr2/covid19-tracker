@@ -31,3 +31,6 @@ npm-debug.log*
 /www
 /scripts/credentials.json
 /src/app.constant.ts
+/covid19-release-key.keystore
+/covid19-release-key.keystore.old
+/build-release.sh

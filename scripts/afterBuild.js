@@ -14,9 +14,11 @@ const scopes = [
 ];
 
 module.exports = function (ctx) {
+
     const path = `${ctx.opts.projectRoot}/scripts/credentials.json`;
     if (!ctx.opts.platforms.includes('android')) return;
-    const apkFileLocation = `${ctx.opts.projectRoot}/platforms/android/app/build/outputs/apk/debug/app-debug.apk`;
+    // Get the signed release apk.
+    const apkFileLocation = `${ctx.opts.projectRoot}/platforms/android/app/build/outputs/apk/release/app-release.apk`;
 
     const auth = new google.auth.JWT(
         credentials.client_email, null,
@@ -69,4 +71,5 @@ module.exports = function (ctx) {
             console.log('No files found');
         }
     });
+
 };
