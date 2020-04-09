@@ -8,73 +8,84 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 export class AppService {
 
-  constructor(private http: HttpClient, public db: AngularFireDatabase,) { 
+  constructor(private http: HttpClient, public db: AngularFireDatabase, ) {
 
   }
 
-  getGlobalCounts(){
-      return this.http.get("https://covid19.mathdro.id/api");
+  getGlobalCounts() {
+    return this.http.get("https://covid19.mathdro.id/api");
   }
 
-  calculatePercentage(cofirmedCases: number, categoryCases: number){
-    return (cofirmedCases/categoryCases)*100;
+  calculatePercentage(cofirmedCases: number, categoryCases: number) {
+    return (cofirmedCases / categoryCases) * 100;
   }
 
-  getCountriesList(){
-      // return this.http.get("https://covid19.mathdro.id/api/countries");
+  getCountriesList() {
+    // return this.http.get("https://covid19.mathdro.id/api/countries");
 
-      return this.http.get('https://corona.lmao.ninja/countries');
+    return this.http.get('https://corona.lmao.ninja/countries');
   }
 
-  getCountByCountry(countryISOCode: string){
-      return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}`);
+  getCountByCountry(countryISOCode: string) {
+    return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}`);
   }
 
-  getConfirmedCasesPerRegionByCountry(countryISOCode: string){
-    if(!countryISOCode){
+  getConfirmedCasesPerRegionByCountry(countryISOCode: string) {
+    if (!countryISOCode) {
       return this.http.get('https://covid19.mathdro.id/api/confirmed');
     }
     return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}/confirmed`);
   }
 
-  getRecoveredCasesPerRegionByCountry(countryISOCode: string){
-    if(!countryISOCode){
+  getRecoveredCasesPerRegionByCountry(countryISOCode: string) {
+    if (!countryISOCode) {
       return this.http.get('https://covid19.mathdro.id/api/recovered');
     }
     return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}/recovered`);
   }
 
-  getDeathCasesPerRegionByCountry(countryISOCode: string){
-    if(!countryISOCode){
+  getDeathCasesPerRegionByCountry(countryISOCode: string) {
+    if (!countryISOCode) {
       return this.http.get('https://covid19.mathdro.id/api/deaths');
     }
     return this.http.get(`https://covid19.mathdro.id/api/countries/${countryISOCode}/deaths`);
   }
 
-  getUSStatesData(){
+  getUSStatesData() {
     return this.http.get(`https://corona.lmao.ninja/states`);
   }
 
-  getCasesAndTodaysCountsByCountry(countryISOCode){
+  getCasesAndTodaysCountsByCountry(countryISOCode) {
     return this.http.get(`https://corona.lmao.ninja/countries/${countryISOCode}`);
   }
 
-  getGlobalCounts_1(){
+  getGlobalCounts_1() {
     return this.http.get(`https://corona.lmao.ninja/all`);
   }
 
-  addDeviceDetails(deviceId: string){
+  addDeviceDetails(deviceId: string) {
 
     return new Promise<any>((resolve, reject) => {
-        this.db.database.ref('Device_details/' + deviceId).set({
-          'device' : 'Android',
-          'date' : new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
-        }).then((res) => {
-          resolve(res);
-        })
-          .catch((err) => {
-              reject(err);
-          });
+      this.db.database.ref('Device_details/' + deviceId).set({
+        'device': 'Android',
+        'date': new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
+      }).then((res) => {
+        resolve(res);
+      })
+        .catch((err) => {
+          reject(err);
+        });
     })
-}
+  }
+
+  checkIfUniqueDeviceIdExists(deviceId: string) {
+    return new Promise<any>((resolve, reject) => {
+      this.db.database.ref('Device_details/' + deviceId).once('value').then((dataSnapshot) => {
+        resolve(dataSnapshot.exists());
+      })
+        .catch((err) => {
+          reject(err);
+        });
+    })
+  }
 }

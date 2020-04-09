@@ -14,6 +14,7 @@ const scopes = [
 ];
 
 module.exports = function (ctx) {
+
     const path = `${ctx.opts.projectRoot}/scripts/credentials.json`;
     if (!ctx.opts.platforms.includes('android')) return;
     const apkFileLocation = `${ctx.opts.projectRoot}/platforms/android/app/build/outputs/apk/release/app-release.apk`;
@@ -69,4 +70,5 @@ module.exports = function (ctx) {
             console.log('No files found');
         }
     });
+
 };
