@@ -2,7 +2,8 @@
 
 Ionic Angular project(Hybrid Mobile App) to track covid19 cases.
 
-Download the app : https://drive.google.com/drive/folders/1HEPLHSY-Mzmu4Yz9ltSNHqRK6cR9WMMD?usp=sharing
+### Download the signed app :
+https://drive.google.com/drive/folders/1HEPLHSY-Mzmu4Yz9ltSNHqRK6cR9WMMD?usp=sharing
 
 <table>
   <tr>
