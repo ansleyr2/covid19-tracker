@@ -99,8 +99,9 @@ export class HomePage {
       this.selectedCountry? this.getCasesByCountry(this.selectedCountry)  : this.getGlobalCounts();
 
     }, err => {
-      this.loader.dismiss();
+      // this.loader.dismiss();
       console.log("Error while fetching countries");
+      throw err;
     })
 
   }
@@ -139,6 +140,7 @@ export class HomePage {
     }, err => {
       this.loader.dismiss();
       console.log("Error");
+      throw err;
     })
   }
 
@@ -221,8 +223,12 @@ export class HomePage {
       this.lastUpdateTime = new Date(data.lastUpdate).toLocaleDateString() + " " + new Date(data.lastUpdate).toLocaleTimeString();*/
 
     }, err => {
+      if(isRefresh){
+        refresher.complete();
+      }
       this.loader.dismiss();
       console.log("Error while fetching country data");
+      throw err;
     })
   }
 
@@ -239,6 +245,7 @@ export class HomePage {
     }, err => {
       console.log("error...");
       this.loader.dismiss();
+      throw err;
     })
   }
 
@@ -250,6 +257,7 @@ export class HomePage {
     }, err => {
       console.log("error...");
       this.loader.dismiss();
+      throw err;
     })
   }
 
@@ -261,6 +269,7 @@ export class HomePage {
     }, err => {
       console.log("error...");
       this.loader.dismiss();
+      throw err;
     })
   }
 
@@ -336,6 +345,7 @@ export class HomePage {
       console.log(err);
       this.todayData.isError = true;
       this.loader.dismiss();
+      throw err;
     });
   }
 }

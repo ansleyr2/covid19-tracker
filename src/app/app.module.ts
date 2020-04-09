@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule/*, IonicErrorHandler*/ } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
@@ -23,7 +23,10 @@ import { AppService } from '../service/app-service';
 // Add firebase config from your firebase console for DB to get user device id
 import { firebaseConfig } from '../app.constant';
 
+import { GlobalErrorHandler } from '../service/error-handling-service';
+import { ToastrModule } from 'ngx-toastr';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,12 +39,19 @@ import { firebaseConfig } from '../app.constant';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-full-width',
+      preventDuplicates: true,
+      progressBar: true,
+      onActivateTick: true
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -56,7 +66,7 @@ import { firebaseConfig } from '../app.constant';
     StatusBar,
     SplashScreen,
     AppService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: GlobalErrorHandler}
   ]
 })
 export class AppModule {}
