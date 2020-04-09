@@ -1,14 +1,15 @@
 {
   "name": "covid19-tracker",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "version": "1.0.1",
+  "author": "Ansley Rodrigues",
+  "homepage": "https://github.com/ansleyr2/covid19-tracker",
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint"
+    "lint": "ionic-app-scripts lint",
+    "build-release": "build-release.sh"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
@@ -64,7 +65,7 @@
     "cordova-plugin-whitelist": "^1.3.3",
     "typescript": "3.5.3"
   },
-  "description": "An Ionic project",
+  "description": "An app to track the global COVID19 cases",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},

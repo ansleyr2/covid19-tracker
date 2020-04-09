@@ -17,7 +17,6 @@ module.exports = function (ctx) {
 
     const path = `${ctx.opts.projectRoot}/scripts/credentials.json`;
     if (!ctx.opts.platforms.includes('android')) return;
-    // Get the signed release apk.
     const apkFileLocation = `${ctx.opts.projectRoot}/platforms/android/app/build/outputs/apk/release/app-release.apk`;
 
     const auth = new google.auth.JWT(
