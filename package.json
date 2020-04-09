@@ -1,6 +1,6 @@
 {
   "name": "covid19-tracker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Ansley Rodrigues",
   "homepage": "https://github.com/ansleyr2/covid19-tracker",
   "private": true,
@@ -8,7 +8,8 @@
     "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint"
+    "lint": "ionic-app-scripts lint",
+    "build-release": "build-release.sh"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
