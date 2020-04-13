@@ -6,6 +6,7 @@ import { AppService } from '../../service/app-service';
 import { ModalController, LoadingController } from 'ionic-angular';
 
 import { ModalPage } from '../modal/modal';
+import { NewsModalPage } from '../modal/news-modal';
 
 interface todayData{
   todayCases? : number;
@@ -58,6 +59,7 @@ export class HomePage {
     console.log(this.selectedCountry);
     this.countries = [];
     this.resetSearchResults();
+
     this.appSvc.getCountriesList().subscribe((data: any) => {
       //console.log(data.countries);
       // const countriesObj = data.countries;
@@ -346,6 +348,30 @@ export class HomePage {
       this.todayData.isError = true;
       this.loader.dismiss();
       throw err;
+    });
+  }
+
+  getNewsByCountry(){
+    this.showLoader();
+    this.appSvc.getNews(this.selectedCountry).subscribe((data: any)=>{
+      console.log(data);
+      this.presentNewsModal(data.articles);
+    }, err=>{
+      this.loader.dismiss();
+      throw err;
+    })
+  }
+
+  async presentNewsModal(data: any) {
+    const modal = this.modalController.create(NewsModalPage, {
+      data: data
+    });
+    modal.onDidDismiss(data => {
+      console.log("modal.onDidDismiss");
+      console.log(data);
+    });
+    modal.present().then(()=>{
+      this.loader.dismiss();
     });
   }
 }

@@ -12,10 +12,14 @@ case $answer in
 # YES SELECTED
 "YES")
 echo "YOU SELECTED $answer."
+# generating www folder
+npm run build
+# deleting release folder contents
 rm platforms/android/app/build/outputs/apk/release/*
 echo ""
 # Prompt for password
 read -s -p "Enter Keystore Password: " password
+# generating the signed build
 cordova build android --release -- --keystore=./covid19-release-key.keystore --storePassword=$password --alias=covid19-release-key --password=$password
 # After build is success, the scripts/afterBuild.js is invoked by ionic after_Build hook mentioned in config.xml
 # The genertaed signed build is uploaded to google drive.

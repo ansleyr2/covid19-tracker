@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+
+
+        <ion-buttons>
+            <button (click)="dismiss()">
+                <ion-icon name="arrow-back" style="font-size: 2em;"></ion-icon>
+            </button>
+        </ion-buttons>
+
+
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card *ngFor="let item of data">
+        <a href={{item.url}} target="_blank">
+        <img src={{item.urlToImage}}>
+        <ion-card-content>
+          <ion-card-title>
+            {{item.title}}
+            </ion-card-title>
+            <p *ngIf="item.publishedAt">
+               {{item.author? item.author + ' |' : ''}}  {{item.publishedAt | date :'medium'}}
+            </p>
+          <p>
+            {{item.description}}
+          </p>
+        </ion-card-content>
+    </a>
+      </ion-card>
+</ion-content>
