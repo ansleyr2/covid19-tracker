@@ -41,7 +41,7 @@ module.exports = function (ctx) {
             });
 
             // Create file
-            var folderId = '1HEPLHSY-Mzmu4Yz9ltSNHqRK6cR9WMMD';
+            var folderId = credentials.drive_upload_folder_id;
 
             var fileMetadata = {
                 'name': 'covid19-tracker.apk',
