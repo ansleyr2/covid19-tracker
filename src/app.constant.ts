@@ -8,3 +8,6 @@ export const firebaseConfig = {
   appId: "1:89178868405:web:b53e725c3bbcab34fd0cfc",
   measurementId: "G-SB0BVY26LH"
 };
+
+// Get api key from https://newsapi.org/
+export const newsApiKey = 'XXXXXXXXXXXXXXXXXX';

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { AngularFireDatabase } from '@angular/fire/database';
 
+import { newsApiKey } from '../app.constant';
+
 
 @Injectable()
 
@@ -87,5 +89,9 @@ export class AppService {
           reject(err);
         });
     })
+  }
+
+  getNews(countryISOCode: string){
+    return this.http.get(`http://newsapi.org/v2/top-headlines?country=${countryISOCode}&q=coronavirus&sortBy=popularity&apiKey=${newsApiKey}`);
   }
 }

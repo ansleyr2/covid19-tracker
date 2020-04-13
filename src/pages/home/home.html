@@ -115,6 +115,7 @@
   style="background-color: whitesmoke;">
     Deaths/Million : {{todayData.deathsPerOneMillion}} 
   </ion-card> -->
-  <button *ngIf="selectedCountry && !isSearch" ion-button block clear primary outline (click)="getTodayData()">More</button>
+  <button *ngIf="selectedCountry && !isSearch" ion-button block clear primary outline (click)="getTodayData()">More Info</button>
+  <button *ngIf="selectedCountry && !isSearch" ion-button block clear primary outline (click)="getNewsByCountry()">Top News Headlines</button>
 
 </ion-content>

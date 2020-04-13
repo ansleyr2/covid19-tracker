@@ -8,6 +8,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ModalPage } from '../pages/modal/modal';
+import { NewsModalPage } from '../pages/modal/news-modal';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -35,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ContactPage,
     HomePage,
     TabsPage,
-    ModalPage
+    ModalPage,
+    NewsModalPage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ContactPage,
     HomePage,
     TabsPage,
-    ModalPage
+    ModalPage,
+    NewsModalPage
   ],
   providers: [
     StatusBar,
