@@ -29,6 +29,10 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FCM } from '@ionic-native/fcm';
+
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -69,7 +73,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StatusBar,
     SplashScreen,
     AppService,
-    {provide: ErrorHandler, useClass: GlobalErrorHandler}
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    FCM
   ]
 })
 export class AppModule {}

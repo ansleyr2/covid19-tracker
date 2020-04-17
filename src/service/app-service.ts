@@ -25,7 +25,7 @@ export class AppService {
   getCountriesList() {
     // return this.http.get("https://covid19.mathdro.id/api/countries");
 
-    return this.http.get('https://corona.lmao.ninja/countries');
+    return this.http.get('https://corona.lmao.ninja/v2/countries');
   }
 
   getCountByCountry(countryISOCode: string) {
@@ -54,15 +54,15 @@ export class AppService {
   }
 
   getUSStatesData() {
-    return this.http.get(`https://corona.lmao.ninja/states`);
+    return this.http.get(`https://corona.lmao.ninja/v2/states`);
   }
 
   getCasesAndTodaysCountsByCountry(countryISOCode) {
-    return this.http.get(`https://corona.lmao.ninja/countries/${countryISOCode}`);
+    return this.http.get(`https://corona.lmao.ninja/v2/countries/${countryISOCode}`);
   }
 
   getGlobalCounts_1() {
-    return this.http.get(`https://corona.lmao.ninja/all`);
+    return this.http.get(`https://corona.lmao.ninja/v2/all`);
   }
 
   addDeviceDetails(deviceId: string) {

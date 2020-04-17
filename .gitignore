@@ -33,3 +33,4 @@ npm-debug.log*
 /src/app.constant.ts
 /covid19-release-key.keystore
 /covid19-release-key.keystore.old
+/src/app.constant.ts
