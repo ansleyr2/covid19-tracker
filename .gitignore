@@ -34,3 +34,4 @@ npm-debug.log*
 /covid19-release-key.keystore
 /covid19-release-key.keystore.old
 /src/app.constant.ts
+/google-services.json
