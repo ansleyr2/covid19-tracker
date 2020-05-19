@@ -13,7 +13,9 @@ https://drive.google.com/drive/folders/1HEPLHSY-Mzmu4Yz9ltSNHqRK6cR9WMMD?usp=sha
 
 #### App statistics using Elasticsearch and Kibana
 
-
+|         |
+| :-----: |
+|<img src="https://github.com/ansleyr2/covid19-tracker/tree/master/src/assets/app-images/kibana-dashboard.PNG" />|
 
 
 ## Getting Started
