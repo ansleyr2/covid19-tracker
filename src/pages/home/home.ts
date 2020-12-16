@@ -43,6 +43,8 @@ export class HomePage {
   isSearch: boolean = false;
   searchPlaceholder: string = "Search Country";
   selectedCountry: string = "";
+  
+  
 
   loader;
 

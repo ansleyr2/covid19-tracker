@@ -1,0 +1,12 @@
+.tabs-md .tab-button[aria-selected=true] {
+    padding: 0;
+    background-color: skyblue;
+}
+
+.tabs-md .tab-button {
+    min-height: 5.6rem;
+    font-weight: normal;
+    color: rgba(60, 60, 60, 0.7);
+    padding: 0;
+    background-color: skyblue;
+}
